@@ -72,3 +72,47 @@ const cardNumberPattern = {
   },
 }
 const cardNumberMasked = IMask(cardNumber, cardNumberPattern)
+
+const addButon = document.querySelector("#add-card")
+addButon.addEventListener("click", () => {
+  alert("Cartão adicionado")
+})
+
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault()
+})
+
+const cardHolder = document.querySelector("#card-holder")
+cardHolder.addEventListener("input", () => {
+  const ccHolder = document.querySelector(".cc-holder .value")
+  ccHolder.innerText =
+    cardHolder.value.length === 0 ? "FULANO DA SILVE" : cardHolder.value
+})
+
+securityCodeMasked.on("accept", () => {
+  upDateSecurityCode(securityCodeMasked.value)
+})
+
+function upDateSecurityCode(code) {
+  const ccSecurity = document.querySelector(".cc-security .value")
+  ccSecurity.innerText = code.length === 0 ? "123" : code
+}
+
+cardNumberMasked.on("accept", () => {
+  const cardType = cardNumberMasked.masked.currentMask.cadtype
+  setCardType(cardType)
+  upDateCardNumber(cardNumberMasked.value)
+})
+
+function upDateCardNumber(number) {
+  const ccNumber = document.querySelector(".cc-number")
+  ccNumber.innerText = number.length === 0 ? "1234 5678 9012 3456" : number
+}
+
+experationDataMasked.on("accept", () => {
+  upDateExpirationDate(experationDataMasked.value)
+})
+function upDateExpirationDate(date) {
+  const ccExpiration = document.querySelector(".cc-extra .value")
+  ccExpiration.innerText = date.length === 0 ? "02/32" : date
+}
